@@ -20,8 +20,6 @@ Many modern scientific problems rely on complex, stochastic simulators for which
 
 This hackathon aims to lower the barrier for new users by combining a **guided tutorial** and an **open hack session** where participants apply SBI to their own problems.
 
----
-
 ## 📚 Structure
 
 ### **Day 1–2 (Tutorial, 1.5 days)**
@@ -40,6 +38,38 @@ Possible directions:
 - Sharing and discussing results at the closing session
 
 We will take inspiration from successful open hackathons such as the [IGE-Jaxathon 2025](https://github.com/Diff4Earth/ige-jaxathon-2025), emphasizing collaboration, openness, and applied research.
+
+## (tentative) Schedule
+
+**-- Wednesday 21-Janvier 2026**
+08h30-09h00 : Welcome
+09h00-10h30 : <span style="color:green; font-weight:bold">(Tutorial)</span> Session 1
+10h30-10h45 : Coffee break
+10h45-12h00 : <span style="color:green; font-weight:bold">(Tutorial)</span> Session 2
+12h00-13h30 : Lunch
+13h30-15h00 : <span style="color:green; font-weight:bold">(Tutorial)</span> Session 3
+15h00-15h30 : Goûter
+15h30-17h00 : <span style="color:green; font-weight:bold">(Tutorial)</span> Session 4
+
+**-- Thursday  22-Janvier 2026**
+08h30-09h00 : Welcome
+09h00-10h30 : <span style="color:green; font-weight:bold">(Tutorial)</span> Session 5
+10h30-10h45 : Coffee break
+10h45-12h00 : <span style="color:green; font-weight:bold">(Tutorial)</span> Session 6
+12h00-13h30 : Lunch
+13h30-15h00 : <span style="color:blue; font-weight:bold">(Hackathon)</span>
+15h00-15h30 : Goûter
+15h30-17h00 : <span style="color:blue; font-weight:bold">(Hackathon)</span>
+
+**-- Friday  23-Janvier 2026**
+08h30-09h00 : Welcome
+09h00-10h30 : <span style="color:blue; font-weight:bold">(Hackathon)</span>
+10h30-10h45 : Coffee break
+10h45-12h00 : <span style="color:blue; font-weight:bold">(Hackathon)</span>
+12h00-13h30 : Lunch
+13h30-15h00 : <span style="color:blue; font-weight:bold">(Hackathon)</span>
+15h00-15h30 : Goûter
+15h30-17h00 : <span style="color:blue; font-weight:bold">(Hackathon)</span>
 
 ---
 
