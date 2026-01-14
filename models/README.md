@@ -4,3 +4,4 @@ The list below repertoriates the different models proposed by the participants o
 
 - [Vincent Garot — Sequence alignments from Birth-Death trees](/models/sequence-alignments/)
 - [Sylvain Doute — Analytic multi-stage simulator for planetary remote sensing (photometric models)](/models/planetary-remote-sensing-photometric/)
+- [Manolis Perrot — 1D PDE / EDMF model for boundary-layer turbulence](/models/edmf-boundary-layer-turbulence/)
