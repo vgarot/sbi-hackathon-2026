@@ -72,7 +72,7 @@ ipython_config.py
 *.err
 
 # sbi
-sbi-logs/
+**/sbi-logs/
 
 # ============================================
 #  IDEs and editors
