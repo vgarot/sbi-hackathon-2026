@@ -7,3 +7,4 @@ The list below repertoriates the different models proposed by the participants o
 - [Manolis Perrot — 1D PDE / EDMF model for boundary-layer turbulence](/models/edmf-boundary-layer-turbulence/)
 - [Gabriel Mouttapa — Tunax: differentiable vertical ocean physics calibration](/models/tunax-vertical-ocean-physics/)
 - [Louis Lesaulnier — LISA MBHB inference with 3-channel TDI time series](/models/lisa-mbhb-tdi-timeseries/)
+- [Nicola Zomer — Voyage simulator for weather routing under uncertainty](/models/voyage-weather-routing/)
