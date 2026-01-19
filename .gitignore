@@ -89,6 +89,8 @@ ipython_config.py
 *.sublime-project
 *.sublime-workspace
 
+.claude/
+
 # ============================================
 #  Testing and coverage
 # ============================================
@@ -110,3 +112,8 @@ coverage.xml
 # ============================================
 # Ignore large data files but keep small configs
 da
+
+*sbi-logs/
+*.key
+*.pdf
+*.pt
