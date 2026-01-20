@@ -71,6 +71,12 @@ ipython_config.py
 *.out
 *.err
 
+# sbi
+sbi-logs/
+
+# npe-pfn
+npe-pfn/
+
 # ============================================
 #  IDEs and editors
 # ============================================
