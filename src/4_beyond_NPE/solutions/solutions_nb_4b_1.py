@@ -7,28 +7,26 @@ posteriors = []   # Store posteriors from each round
 
 for round_idx in range(NUM_ROUNDS):
     print(f"\n=== Round {round_idx + 1} ===")
-
-    # Step 1: Generate training data by sampling from the proposal
+    
+    # TODO Step 1: Generate training data by sampling from the proposal
+    # Use simulate_for_sbi(simulator, proposal, NUM_SIMS_PER_ROUND, num_workers=NUM_WORKERS)
     print(f"Simulating {NUM_SIMS_PER_ROUND} samples...")
     theta, x = simulate_for_sbi(simulator, proposal, NUM_SIMS_PER_ROUND, num_workers=NUM_WORKERS)
-
-    # Step 2: Append simulations (pass proposal for SNPE correction)
+    
+    # TODO Step 2: Append simulations to trainer
+    # Important: pass proposal=proposal so SNPE knows where samples came from
     trainer.append_simulations(theta, x, proposal=proposal)
-
-    # Step 3: Train
+    
+    # TODO Step 3: Train
     print("Training...")
     trainer.train(show_train_summary=True)
-
-    # Step 4: Build posterior
+    
+    # TODO Step 4: Build posterior and store it
     posterior = trainer.build_posterior()
     posteriors.append(posterior)
-
-    # Step 5: Set posterior as proposal for next round (focused on x_o)
+    
+    # TODO Step 5: Update proposal for next round
+    # Use posterior.set_default_x(x_o) to condition on our observation
     proposal = posterior.set_default_x(x_o)
-
-    # Quick check
-    samples = posterior.sample((1000,), x=x_o)
-    print(f"Posterior mean: {samples.mean(dim=0).numpy()}")
-    print(f"Posterior std:  {samples.std(dim=0).numpy()}")
 
 print("\n=== Done ===")
