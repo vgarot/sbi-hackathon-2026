@@ -105,6 +105,9 @@ std::vector<EXPERIMENT> generate_experiments(std::string config_file) {
     } else if (infectious_time_dist_type == "uniform") {
         std::uniform_real_distribution<> dist(infectious_time_param1, infectious_time_param2);
         infectious_time_dis = [dist, &generators](int thread_num) mutable { return dist(generators[thread_num]); };
+    } else if (infectious_time_dist_type == "exponential") {
+        std::exponential_distribution<> dist(1.0/infectious_time_param1);
+        infectious_time_dis = [dist, &generators](int thread_num) mutable { return dist(generators[thread_num]); };
     } else {
         throw std::invalid_argument("Unsupported distribution type for infectious_time");
     }
