@@ -25,7 +25,7 @@ ${output}/generation_bds_trees ${json_path} $output
 
 # ## 2. Generate sequences
 tail -n +2 $output/design.csv | parallel --colsep ";" --eta --progress --bar \
-    "if [ {4} -eq 0 ]; then continue; else $iqtree --alisim $output/seq/{10}_seq -m {8} --branch-scale {7} -t $output/trees/{10} -af fasta > /dev/null; fi"
+    "if [ {4} -eq 0 ]; then continue; else $iqtree --alisim $output/seq/{10}_seq -m {8} --length {9} --branch-scale {7} -t $output/trees/{10} -af fasta > /dev/null; fi"
 
 
 set +x
