@@ -1,0 +1,60 @@
+{   
+    "seed": 2042,
+    "alphabet": "ATGCX-",
+    "teddy": {
+        "embed_dim": 64,
+        "nb_heads": 4,
+        "ffn_dim": 256,
+        "output_dim": 2,
+        "hidden_dim": 256,
+        "nb_layers": 6,
+        "dropout": 0.0,
+        "dates": true,
+        "lastnorm": false
+    },
+    "teddy_lightning": {
+        "learning_rate": 8e-5,
+        "warmup_steps": 10000,
+        "normalization": {
+            "R_0": [1,5],
+            "dur": [1,10]
+        },
+        "scale_dur_loss": 5.0,
+        "normalized_loss": false,
+        "scheduler_type": "cosine"
+    },
+    "datamodule":{
+        "data_dir": "<path_to_data_directory>",
+        "val_batch_size" : 64,
+        "batch_size" : 64,
+        "train_ratio": 0.98,
+        "num_workers": 24,
+        "limit_size": 250,
+        "max_seq_len": 100,
+        "max_sites_len": 250,
+        "drop_last": true,
+        "scale_dates": 1.0,
+        "scale_dur_target": 1.0,
+        "pin_memory": true,
+        "persistent_workers": true,
+        "prefetch_factor": 2,
+        "max_size_dataset": 500000
+    },
+    "wandb_logger": {
+        "project":"teddy_experiments",
+        "save_dir":"<path_to_save_logs>",
+        "name":"<experiment_name>",
+        "offline": true
+    },
+    
+    "model_save_every_train_step": 20000,
+    "trainer": {
+        "accelerator":"auto",
+        "strategy":"auto",
+        "devices":"auto",
+        "num_nodes":1,
+        "precision":"bf16-mixed",
+        "log_every_n_steps":500,
+        "max_steps":500000
+    }
+}
