@@ -1,0 +1,45 @@
+{   
+    "number_of_experiments": 100,
+    "seed": 54,
+    "R_0": {
+        "distribution": "uniform",
+        "param1" : 1,
+        "param2" : 5
+    },
+    "infectious_time": {
+        "distribution": "uniform",
+        "param1" : 1.0,
+        "param2" : 10.0
+    },
+    "sampling_proportion": {
+        "distribution": "powered10uniform",
+        "param1" : -2,
+        "param2" : 0
+    },
+    "number_of_samples": {
+        "distribution": "uniform",
+        "param1" : 20,
+        "param2" : 100
+    },
+    "max_trys": {
+        "distribution": "uniform",
+        "param1" : 100,
+        "param2" : 100
+    },
+    "max_time": {
+        "distribution": "uniform",
+        "param1" : 100000,
+        "param2" : 100000
+    },
+    "clock_rate": {
+        "distribution": "powered10uniform",
+        "param1" : -5,
+        "param2" : -3
+    },
+    "num_sites": {
+        "distribution": "uniform",
+        "param1" : 1500,
+        "param2" : 1500
+    },
+    "evolution_model": "GTR"
+}
