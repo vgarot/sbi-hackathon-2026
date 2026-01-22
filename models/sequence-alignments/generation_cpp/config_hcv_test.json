@@ -1,0 +1,46 @@
+{   
+    "number_of_experiments": 1000,
+    "seed": 2025,
+    "R_0": {
+        "distribution": "uniform",
+        "param1" : 1,
+        "param2" : 5
+    },
+    "infectious_time": {
+        "distribution": "uniform",
+        "param1" : 0.5,
+        "param2" : 10
+    },
+    "sampling_proportion": {
+        "distribution": "powered10uniform",
+        "param1" : -2,
+        "param2" : 0
+    },
+    "number_of_samples": {
+        "distribution": "uniform",
+        "param1" : 20,
+        "param2" : 100
+    },
+    "max_trys": {
+        "distribution": "uniform",
+        "param1" : 100,
+        "param2" : 100
+    },
+    "max_time": {
+        "distribution": "uniform",
+        "param1" : 1000,
+        "param2" : 1000
+    },
+    "clock_rate": {
+        "distribution": "uniform",
+        "param1" : 0.0013,
+        "param2" : 0.0013
+    },
+    "num_sites": {
+        "distribution": "uniform",
+        "param1" : 346,
+        "param2" : 346
+    },
+    "evolution_model": "GTR{0.07349,0.817,0.0165,0.02485,1.0,0.0262}+G4{0.508}+I{0.499}",
+    "rootseq": "<path_to_fasta>,<id_of_sequence_in_fasta>"
+}
