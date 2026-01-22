@@ -51,6 +51,10 @@ env.bak/
 venv.bak/
 *.conda
 *.mamba
+.devenv/
+.devenv.flake.nix
+./devenv.lock
+tmp_pip/
 
 # ============================================
 #  Jupyter and IPython
