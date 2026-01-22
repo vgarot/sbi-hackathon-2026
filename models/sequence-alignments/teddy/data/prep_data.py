@@ -67,7 +67,7 @@ def prep_data(path: str,
     nb_sites = len(test) -2
     test[1] = True # to keep the "cls" column token (date is on the first column)
     test[0] = True # to keep the dates 
-    data = data[:,test]
+    # data = data[:,test]
     new_nb_sites = data.shape[1] -2
 
     data = _add_row_cls(data,alphabet)
