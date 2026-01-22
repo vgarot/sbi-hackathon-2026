@@ -1,0 +1,68 @@
+{   
+    "output_directory": "/home/vincent/PhD/code/sbi-grenoble26/grenoble_sbi_sequence_alignement/data/test",
+    "tmp_dir": "/home/vincent/PhD/code/sbi-grenoble26/grenoble_sbi_sequence_alignement/data/tmp/",
+    "number_of_experiments": 1000,
+    "seed": 42351,
+    "delete_temp_files": false,
+    "recombinant_points_file": "/home/vincent/PhD/code/sbi-grenoble26/grenoble_sbi_sequence_alignement/generation/recombination_points_pol_B_CRFs.csv",
+    "iqtree_path": "/home/vincent/PhD/code/teddy/deepdynamics/iqtree/iqtree-2.2.2.6-Linux/bin/iqtree2",
+    "capacity_decrease":false,
+    "verbose_nb_diff": false,
+    "R_0": {
+        "distribution": "uniform",
+        "param1" : 1,
+        "param2" : 5
+    },
+    "infectious_time": {
+        "distribution": "uniform",
+        "param1" : 1,
+        "param2" : 10
+    },
+    "sampling_proportion": {
+        "distribution": "powered10uniform",
+        "param1" : 0,
+        "param2" : 0
+    },
+    "coinfect_capacity": {
+        "distribution": "uniform",
+        "param1" : 200,
+        "param2" : 200
+    },
+    "recomb_prop": {
+        "distribution": "uniform",
+        "param1" : 0.1,
+        "param2" : 0.5
+    },
+    "superinfect_prop": {
+        "distribution": "uniform",
+        "param1" : 0.5,
+        "param2" : 0.5
+    },
+
+    "number_of_samples": {
+        "distribution": "uniform",
+        "param1" : 100,
+        "param2" : 100
+    },
+    "max_trys": {
+        "distribution": "uniform",
+        "param1" : 100,
+        "param2" : 100
+    },
+    "max_time": {
+        "distribution": "uniform",
+        "param1" : 1000,
+        "param2" : 1000
+    },
+    "clock_rate": {
+        "distribution": "powered10uniform",
+        "param1" : -5,
+        "param2" : -3
+    },
+    "num_sites": {
+        "distribution": "uniform",
+        "param1" : 1617,
+        "param2" : 1617
+    },
+    "evolution_model": "GTR"
+}
