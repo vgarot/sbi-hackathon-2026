@@ -7,6 +7,16 @@
     pkgs.bashInteractive
     pkgs.uv
     pkgs.python311  # or python311, whichever you prefer
+
+    pkgs.gcc13
+    # Override iqtree to add CMAKE_POLICY_VERSION_MINIMUM
+    (pkgs.iqtree.overrideAttrs (oldAttrs: {
+      cmakeFlags = (oldAttrs.cmakeFlags or []) ++ [
+        "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+      ];
+    }))
+
+    pkgs.parallel
   ];
 
 enterShell = ''
@@ -26,13 +36,13 @@ enterShell = ''
     source .venv/bin/activate
 
     # Sync from uv.lock (much faster than requirements.txt, reproducible)
-    uv sync --no-cache
+    # uv sync --no-cache
 
     # Install ipykernel for Jupyter
-    uv add ipykernel --no-cache
+    # uv add ipykernel --no-cache
 
     # Register kernel
-    python -m ipykernel install --user \
+    # python -m ipykernel install --user \
       --name sbi-hackathon-uv \
       --display-name "Python (sbi-hackathon uv)"
 

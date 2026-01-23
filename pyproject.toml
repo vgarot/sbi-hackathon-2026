@@ -9,6 +9,7 @@ dependencies = [
     "ipywidgets",
     "notebook>=6.4.12",
     "ipykernel>=7.1.0",
+    "lightning>=2.6.0",
 ]
 
 [build-system]
