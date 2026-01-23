@@ -25,7 +25,8 @@ class BDS_datamodule(pl.LightningDataModule):
                  scale_dates:float = 1.0,
                  scale_dur_target:float = 1.0,
                  max_size_dataset: int = None,
-                 round_dates:bool = False
+                 round_dates:bool = False,
+                 flatten_mode: bool = True,
                  ):
         super().__init__()
 
@@ -59,6 +60,7 @@ class BDS_datamodule(pl.LightningDataModule):
         self.scale_dates = scale_dates
         self.max_size_dataset = max_size_dataset
         self.round_dates = round_dates
+        self.flatten_mode = flatten_mode
 
     def setup(self,stage=None):
         self.dataset = MsaLabels(self.data_dir, self.alphabet, limit_size=self.limit_size, cache_dir=self.cache_dir, scale_dur_target=self.scale_dur_target, scale_dates=self.scale_dates, max_size_dataset=self.max_size_dataset, round_dates=self.round_dates)
@@ -75,10 +77,11 @@ class BDS_datamodule(pl.LightningDataModule):
                                 batch_size=self.batch_size,
                                 shuffle=self.shuffle,
                                 num_workers=self.num_workers,
-                                collate_fn=CollateCustomfn(self.alphabet.pad_idx, self.max_seq_len, self.max_sites_len),
+                                collate_fn=CollateCustomfn(self.alphabet.pad_idx, self.max_seq_len, self.max_sites_len, flatten_mode=self.flatten_mode),
                                 prefetch_factor=self.prefetch_factor,
                                 persistent_workers=self.persistent_workers,
-                                pin_memory=self.pin_memory
+                                pin_memory=self.pin_memory,
+                                
                                 )
         
 
@@ -106,7 +109,7 @@ class BDS_datamodule(pl.LightningDataModule):
                           batch_size=self.val_batch_size, 
                           shuffle=False, 
                           num_workers=self.num_workers,
-                          collate_fn=CollateCustomfn(self.alphabet.pad_idx, self.max_seq_len, self.max_sites_len), 
+                          collate_fn=CollateCustomfn(self.alphabet.pad_idx, self.max_seq_len, self.max_sites_len,flatten_mode=self.flatten_mode), 
                           prefetch_factor=self.prefetch_factor, 
                           persistent_workers=self.persistent_workers, 
                           pin_memory=self.pin_memory
