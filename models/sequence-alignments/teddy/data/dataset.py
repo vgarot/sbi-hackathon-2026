@@ -68,10 +68,11 @@ class MsaLabels(Dataset):
     def __len__(self):
         return len(self.seq_files)
 class CollateCustomfn:
-    def __init__(self, pad_idx, max_seq_len, max_sites_len):
+    def __init__(self, pad_idx, max_seq_len, max_sites_len, flatten_mode=True):
         self.pad_idx = pad_idx
         self.max_seq_len = max_seq_len + 1
         self.max_sites_len = max_sites_len + 2
+        self.flatten_mode = flatten_mode
     
     def __call__(self, batch):
         data = [pad(item[0][0], (0, self.max_sites_len-item[0][0].shape[1], 
@@ -83,9 +84,11 @@ class CollateCustomfn:
                              for item in batch])
         labels = torch.stack([item[1] for item in batch])
 
-        data = torch.flatten(torch.as_tensor(data, dtype=torch.float32), start_dim=1)
+        if self.flatten_mode:
+            data = torch.flatten(torch.as_tensor(data, dtype=torch.float32), start_dim=1)
 
-        return (data, shapes), labels
+        # return (data, shapes), labels
+        return data, labels
 
 class MsaName(Dataset):
     """TensorDataset for data and labels"""
