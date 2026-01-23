@@ -6,6 +6,7 @@ from torch.nn.functional import pad
 from torch.utils.data import DistributedSampler
 import random
 import math
+import pandas as pd
 
 
 def _extract_label_from_path(path,
@@ -15,10 +16,10 @@ def _extract_label_from_path(path,
     try:
         x = path.split('__')
         br,dr,s = float(x[1]),float(x[2]), float(".".join(x[3].split(".")[:2]))
-        label = torch.Tensor([br/dr, 1/dr * scale_dur_target,s])
+        label = [br/dr, 1/dr * scale_dur_target,s]
         return label
     except:
-        return torch.Tensor([0,0,0])
+        return [0,0,0]
 
 
 class MsaLabels(Dataset):
@@ -49,21 +50,35 @@ class MsaLabels(Dataset):
         self.scale_dates = scale_dates
         self.round_dates = round_dates
 
+        # you need to have a design.csv file in folder below for this to work
+        # TODO: abstract it to an init parameter
+        design_csv_path = "data/example/design.csv"
+        if os.path.exists(design_csv_path):
+            self.design_params = pd.read_csv(design_csv_path, sep=';', index_col="output_file").sort_index().reset_index()
+        else:
+            self.design_params = None
+
     def __getitem__(self, index):
         name = self.seq_files[index]
         R_0,dur,s = _extract_label_from_path(name, 
                                              scale_dur_target=self.scale_dur_target)
+        param_list = [R_0,dur]
+        if self.design_params is not None:
+            design_params = self.design_params.iloc[index][["sampling_proportion", "clock_rate"]].astype(float).values.tolist()
+            param_list.extend(design_params)
+
+        
         if self.cache_dir is not None:
             if os.path.exists(os.path.join(self.cache_dir,name+'.pt')):
-                data,shape = torch.load(os.path.join(self.cache_dir,name+'.pt'), weights_only=True)
+                data,shape,minimum_date = torch.load(os.path.join(self.cache_dir,name+'.pt'), weights_only=True)
             else:
-                data,shape = prep_data(os.path.join(self.dir,name),self.alphabet,s, scale_dates=self.scale_dates, round_dates=self.round_dates)
-                torch.save((data,shape),os.path.join(self.cache_dir,name+'.pt'))
+                data,shape, minimum_date = prep_data(os.path.join(self.dir,name),self.alphabet,s, scale_dates=self.scale_dates, round_dates=self.round_dates)
+                torch.save((data,shape,minimum_date),os.path.join(self.cache_dir,name+'.pt'))
         else: 
-            data,shape = prep_data(os.path.join(self.dir,name),self.alphabet,s, scale_dates=self.scale_dates, round_dates=self.round_dates)
-        
+            data,shape,minimum_date = prep_data(os.path.join(self.dir,name),self.alphabet,s, scale_dates=self.scale_dates, round_dates=self.round_dates)
+        param_list.append(minimum_date)
         data,shape = resample_sites(data,shape,self.limit_size)
-        return (data,shape), torch.Tensor([R_0,dur])
+        return (data,shape), torch.Tensor(param_list)
     
     def __len__(self):
         return len(self.seq_files)

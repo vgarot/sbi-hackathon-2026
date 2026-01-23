@@ -61,7 +61,8 @@ def prep_data(path: str,
     data = torch.Tensor(data)
     
     # Remove the minimum date
-    data[:,0] = data[:,0] - data[:,0].min()
+    minimum_date = data[:, 0].min()
+    data[:,0] = data[:,0] - minimum_date
 
     test = (data[1:,:] - data[:-1,:]).abs().sum(axis=0) != 0
     nb_sites = len(test) -2
@@ -74,7 +75,7 @@ def prep_data(path: str,
     data[0,0] = s
     
     shape = (nb_seq,nb_sites,new_nb_sites)
-    return (data,shape)
+    return (data,shape, minimum_date)
 
 def resample_sites(data,
                    shape,
