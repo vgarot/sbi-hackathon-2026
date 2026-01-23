@@ -3,6 +3,16 @@ import torch
 from torch.nn.attention.flex_attention import flex_attention
 
 
+# Wrapper function for flex_attention that can be compiled
+def _flex_attention_wrapper(queries, keys, values, block_mask):
+    """Wrapper for flex_attention that is compatible with torch.compile()"""
+    return flex_attention(queries, keys, values, block_mask=block_mask)
+
+
+# Compile the wrapper function
+_compiled_flex_attention = torch.compile(_flex_attention_wrapper, mode="reduce-overhead", fullgraph=False)
+
+
 class MultiheadFlexAttention(nn.Module):
     def __init__(self, d_in, d_out, n_heads, bias=False):
         """
@@ -43,8 +53,8 @@ class MultiheadFlexAttention(nn.Module):
 
         # Get queries, keys, values
         queries, keys, values = qkv # 3 x (batch_size, n_heads, max_seq_len, d_head)
-        # Calculate attention via flex_attention
-        attn = flex_attention(queries, keys, values, block_mask=block_mask) # (batch_size, n_heads, max_seq_len, d_head)
+        # Calculate attention via compiled flex_attention
+        attn = _compiled_flex_attention(queries, keys, values, block_mask) # (batch_size, n_heads, max_seq_len, d_head)
 
         # Merge heads into d_out
         attn = attn.transpose(1, 2).contiguous().view(batch_size, max_seq_len, self.d_out)
