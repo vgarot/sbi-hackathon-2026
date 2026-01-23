@@ -83,6 +83,8 @@ class CollateCustomfn:
                              for item in batch])
         labels = torch.stack([item[1] for item in batch])
 
+        data = torch.flatten(torch.as_tensor(data, dtype=torch.float32), start_dim=1)
+
         return (data, shapes), labels
 
 class MsaName(Dataset):
