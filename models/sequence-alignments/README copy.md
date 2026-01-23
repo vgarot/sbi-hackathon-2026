@@ -15,3 +15,10 @@ If you want to generate data, there are few other requirements:
 Once you have g++ installed, you can generate data using `sh generation_cpp/gen_random.sh`. 
 
 You should change the path to `iqtree` and you may change the `output` path. 
+
+
+
+
+# Some information
+
+If you want to use the already trained embedding network, you can load the model from the checkpoint `./checkpoints/teddy_no_regression.pt`.

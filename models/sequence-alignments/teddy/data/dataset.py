@@ -34,7 +34,7 @@ class MsaLabels(Dataset):
                  round_dates:bool = False
                  ):
         self.dir = dir
-        self.seq_files = [item for item in os.listdir(self.dir) if item[-3:]=='.fa']
+        self.seq_files = [item for item in sorted(os.listdir(self.dir)) if item[-3:]=='.fa']
         if max_size_dataset is not None:
             assert max_size_dataset <= len(self.seq_files), "max_size_dataset should be less than or equal to the number of files in the directory"
             self.seq_files = random.sample(self.seq_files, max_size_dataset)
