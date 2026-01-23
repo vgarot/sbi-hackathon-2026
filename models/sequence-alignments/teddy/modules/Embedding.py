@@ -34,8 +34,9 @@ class Embedding(nn.Module):
                 return ~pads[b, q_idx] & ~pads[b, kv_idx]
             return padding
 
-        x = input[0]
-        shapes = input[1]
+        # x = input[0]
+        # shapes = input[1]
+        x = input
 
         dates, data, s = x[:,1:,0], x[:,:,1:], x[:,0,0] # BATCH, ROW, COL
         
@@ -43,14 +44,14 @@ class Embedding(nn.Module):
 
         data = nn.functional.one_hot(data.long(),num_classes=self.alphabet_size).float()
         s = s.unsqueeze(-1).unsqueeze(-1).expand(-1,data.shape[1],data.shape[2])
-        seq = shapes[:,0].unsqueeze(-1).unsqueeze(-1).expand(-1,data.shape[1],data.shape[2])/100
-        sites = shapes[:,1].unsqueeze(-1).unsqueeze(-1).expand(-1,data.shape[1],data.shape[2])/1000
-        nonconstant_sites = shapes[:,2].unsqueeze(-1).unsqueeze(-1).expand(-1,data.shape[1],data.shape[2])/1000
+        # seq = shapes[:,0].unsqueeze(-1).unsqueeze(-1).expand(-1,data.shape[1],data.shape[2])/100
+        # sites = shapes[:,1].unsqueeze(-1).unsqueeze(-1).expand(-1,data.shape[1],data.shape[2])/1000
+        # nonconstant_sites = shapes[:,2].unsqueeze(-1).unsqueeze(-1).expand(-1,data.shape[1],data.shape[2])/1000
 
         data[:,:,:,self.s_idx] = s
-        data[:,:,:,self.seq_idx] = seq
-        data[:,:,:,self.site_idx] = sites
-        data[:,:,:,self.nonconstant_site_idx] = nonconstant_sites
+        # data[:,:,:,self.seq_idx] = seq
+        # data[:,:,:,self.site_idx] = sites
+        # data[:,:,:,self.nonconstant_site_idx] = nonconstant_sites
 
         embedding = self.linear1(data)
         embedding = self.relu(embedding)
