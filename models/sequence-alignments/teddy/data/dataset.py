@@ -51,8 +51,10 @@ class MsaLabels(Dataset):
         self.round_dates = round_dates
 
         # you need to have a design.csv file in folder below for this to work
-        design_csv_path = self.dir + "design.csv"
+        design_csv_path = self.dir[:-4] + "/design.csv"
+        print(design_csv_path)
         if os.path.exists(design_csv_path):
+            print("a")
             self.design_params = pd.read_csv(design_csv_path, sep=';', index_col="output_file").sort_index().reset_index()
         else:
             self.design_params = None
